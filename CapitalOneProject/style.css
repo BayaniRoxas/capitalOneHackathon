@@ -1,0 +1,196 @@
+body {
+    margin: 0;
+    font-family: 'Prompt', sans-serif;
+    color: white;
+    background: #202731;
+    overflow-x: hidden;
+    font-family: 'Roboto mono', monospace;
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 400px;
+    padding: 100px 20vw;
+}
+
+.pink {
+    margin-top: px;
+    background: #ff0066;
+    overflow: hidden;
+    min-height: 300px; /* Adjusted to reduce height */
+}
+
+.dark {
+    background: #0f0f10;
+}
+
+.curve {
+    position: absolute;
+    height: 225px;
+    width: 100%;
+    bottom: 0;
+}
+
+.curve::before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    background-color: #202731;
+    transform: translate(85%, 60%);
+}
+
+.curve::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    background-color: #3c31dd;
+    transform: translate(-4%, 40%);
+    z-index: -1;
+}
+
+.bubble::after {
+    content: '';
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    position: absolute;
+    bottom: 0;
+    height: 85%;
+    width: 100%;
+    background-color: #0f0f10;
+    z-index: -1;
+}
+
+.waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.waves svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 149px;
+}
+
+.waves .shape-fill {
+    fill: #0f0f10;
+}
+
+.spacer {
+    aspect-ratio: 960/300;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #ff0066;
+}
+
+.layer1 {
+    background-image: url(./layer1.svg);
+}
+
+.layer2 {
+    background-image: url(./layer2.svg);
+}
+
+.flip {
+    transform: rotate(180deg);
+}
+
+.blob-motion {
+    position: absolute;
+    transform: translateY(-20%);
+    z-index: 0;
+}
+
+.blob-content {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 300px; /* Adjusted to reduce height */
+    padding: 100px;
+}
+
+.blob-content h1 {
+    font-size: 100px;
+    font-family: 'Roboto mono', monospace;
+    text-align: center;
+}
+
+#tagLine {
+    display: flex;
+    margin-top: 20px;
+    font-size: 12px;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.specialButton {
+    margin-top: 80px;
+    padding: 10px;
+}
+
+
+/* BLEH BLEH BLEH BLEH BLEH */
+
+/* Container for the two main blocks */
+.container {
+    display: flex;
+    min-height: 100vh; /* Full viewport height, grows as content is added */
+}
+
+/* Main block styling */
+.block {
+    flex: 1; /* Each block takes up 50% of the container width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    overflow-y: auto; /* Allows scrolling within each block if content overflows */
+}
+
+/* Left and right block background colors */
+.left-block {
+    background-color: #3498db;
+    border-right: 4px solid #ffffff; /* Adds a white border between the blocks */
+}
+
+.right-block {
+    background-color: #2ecc71;
+}
+
+/* Inner container for each block */
+.inner-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between boxes */
+    width: 80%; /* Width of inner container */
+}
+
+/* Styling for individual boxes */
+.box {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Sliding animation */
+
