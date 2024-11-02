@@ -101,7 +101,7 @@
         }
 
         button {
-            width: 100%;
+            width: 50%;
             padding: 12px;
             background-color: #48bb78;
             color: white;
@@ -115,7 +115,24 @@
         button:hover {
             background-color: #38a169;
         }
+        .reset-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 8px; /* Adjust margin as needed */
+    width: 45%;
+    height: 45px;
+    min-height: 7px;
+}
 
+.reset-button:hover {
+    background-color: #ff0000; /* Turn red on hover */
+    color: #f5eeee;
+
+}
         .results {
             display: none;
             margin-top: 24px;
@@ -202,7 +219,7 @@
         </div>
 
         <button onclick="calculateFootprint()">Calculate Footprint</button>
-
+        <button class="reset-button" onclick="resetForm()">Reset</button>
         <div class="results">
             <div class="result-card">
                 <div class="result-label">Transport</div>
@@ -282,6 +299,24 @@
             // Show results
             document.querySelector('.results').style.display = 'grid';
         }
+        function resetForm() {
+  // Reset input fields
+  document.getElementById('carDistance').value = 0;
+  document.getElementById('busDistance').value = 0;
+  document.getElementById('electricity-usage').value = 0;
+  document.getElementById('meatMeals').value = 0;
+  document.getElementById('vegMeals').value = 0;
+
+  // Reset result display
+  document.getElementById('transportResult').textContent = '0 kg CO₂';
+  document.getElementById('electricityResult').textContent = '0 kg CO₂';
+  document.getElementById('foodResult').textContent = '0 kg CO₂';
+  document.getElementById('totalResult').textContent = '0 kg CO₂';
+
+  // Hide results and facts section
+  document.querySelector('.results').style.display = 'none';
+  document.querySelector('.facts-section').style.display = 'none';
+}
     </script>
 </body>
 </html>
