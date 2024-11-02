@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a2b3c;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 12px;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #4a5568;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background-color: #edf2f7;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #38a169;
+        }
+
+        .results {
+            display: none;
+            margin-top: 24px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .result-card {
+            background-color: #f7fafc;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result-card.total {
+            background-color: #f0fff4;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 4px;
+        }
+
+        .result-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .results {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Carbon Footprint Calculator</h1>
+        
+        <div class="tabs">
+            <button class="tab active" data-tab="transport">Transport</button>
+            <button class="tab" data-tab="electricity">Electricity</button>
+            <button class="tab" data-tab="food">Food</button>
+        </div>
+
+        <div class="tab-content active" id="transport">
+            <div class="input-group">
+                <label for="carDistance">Car Distance (km)</label>
+                <input type="number" id="carDistance" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="busDistance">Bus Distance (km)</label>
+                <input type="number" id="busDistance" min="0" value="0">
+            </div>
+        </div>
+
+        <div class="tab-content" id="electricity">
+            <div class="input-group">
+                <label for="electricity">Electricity Usage (kWh)</label>
+                <input type="number" id="electricity" min="0" value="0">
+            </div>
+        </div>
+
+        <div class="tab-content" id="food">
+            <div class="input-group">
+                <label for="meatMeals">Meat-based Meals</label>
+                <input type="number" id="meatMeals" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="vegMeals">Vegetarian Meals</label>
+                <input type="number" id="vegMeals" min="0" value="0">
+            </div>
+        </div>
+
+        <button onclick="calculateFootprint()">Calculate Footprint</button>
+
+        <div class="results">
+            <div class="result-card">
+                <div class="result-label">Transport</div>
+                <div class="result-value" id="transportResult">0 kg CO₂</div>
+            </div>
+            <div class="result-card">
+                <div class="result-label">Electricity</div>
+                <div class="result-value" id="electricityResult">0 kg CO₂</div>
+            </div>
+            <div class="result-card">
+                <div class="result-label">Food</div>
+                <div class="result-value" id="foodResult">0 kg CO₂</div>
+            </div>
+            <div class="result-card total">
+                <div class="result-label">Total</div>
+                <div class="result-value" id="totalResult">0 kg CO₂</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Emission factors
+        const EMISSION_FACTORS = {
+            car: 0.2,        // kg CO2/km
+            bus: 0.08,       // kg CO2/km
+            electricity: 0.5, // kg CO2/kWh
+            meatMeal: 3.0,   // kg CO2/meal
+            vegMeal: 0.5     // kg CO2/meal
+        };
+
+        function calculateFootprint() {
+            // Get input values
+            const carDistance = parseFloat(document.getElementById('carDistance').value) || 0;
+            const busDistance = parseFloat(document.getElementById('busDistance').value) || 0;
+            const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+            const meatMeals = parseFloat(document.getElementById('meatMeals').value) || 0;
+            const vegMeals = parseFloat(document.getElementById('vegMeals').value) || 0;
+
+            // Calculate emissions
+            const transport = (carDistance * EMISSION_FACTORS.car) + 
+                            (busDistance * EMISSION_FACTORS.bus);
+            const electricityEmissions = electricity * EMISSION_FACTORS.electricity;
+            const food = (meatMeals * EMISSION_FACTORS.meatMeal) + 
+                        (vegMeals * EMISSION_FACTORS.vegMeal);
+            const total = transport + electricityEmissions + food;
+
+            // Update results
+            document.getElementById('transportResult').textContent = `${transport.toFixed(2)} kg CO₂`;
+            document.getElementById('electricityResult').textContent = `${electricityEmissions.toFixed(2)} kg CO₂`;
+            document.getElementById('foodResult').textContent = `${food.toFixed(2)} kg CO₂`;
+            document.getElementById('totalResult').textContent = `${total.toFixed(2)} kg CO₂`;
+
+            // Show results
+            document.querySelector('.results').style.display = 'grid';
+        }
+    </script>
+</body>
+</html>
