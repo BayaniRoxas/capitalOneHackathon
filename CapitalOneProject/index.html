@@ -12,6 +12,9 @@
 
 <body>
 
+  <div class="container">
+
+  
   
 <!--THIS SECTION IS ABOUT THE MAIN COMPANY PAGE-->
     <section class="pink">
@@ -61,36 +64,120 @@
         </script>
       </section>
 
+      <div class="spacer layer2 "></div>
+      
 
 <!-- THIS SECTION IS ABOUT THE SPLIT SCREEN -->
-    <div class="container">
-      <!-- Left Side -->
-      <div class="block left-block">
-          <h1>Left Side</h1>
-          <div class="inner-container">
-              <div class="box">
-                  <p>Box 1: Left Side Content</p>
-                  
-              </div>
-              <div class="box">
-                  <p>Box 2: Additional Content</p>
-              </div>
-          </div>
-      </div>
+        <!-- Split screen section -->
+        <div class="split-container" id="calculatorSection">
 
-      <!-- Right Side -->
-      <div class="block right-block">
-          <h1>Right Side</h1>
-          <div class="inner-container">
-              <div class="box">
-                  <p>Box 1: Right Side Content</p>
-              </div>
-              <div class="box">
-                  <p>Box 2: More Information</p>
+          <!-- Left Side -->
+          <div class="left-block">
+            <div class="inner-container">
+
+            
+            <h1>Input Your Data</h1>
+            <div class="box">
+                <label for="carDistance">Car Distance (km)</label>
+                <input type="number" id="carDistance" min="0" value="0">
+            </div>
+            <div class="box">
+                <label for="busDistance">Bus Distance (km)</label>
+                <input type="number" id="busDistance" min="0" value="0">
+            </div>
+            <div class="box">
+                <label for="electricity">Electricity Usage (kWh)</label>
+                <input type="number" id="electricity" min="0" value="0">
+            </div>
+            <div class="box">
+                <label for="meatMeals">Meat-based Meals</label>
+                <input type="number" id="meatMeals" min="0" value="0">
+            </div>
+            <div class="box">
+                <label for="vegMeals">Vegetarian Meals</label>
+                <input type="number" id="vegMeals" min="0" value="0">
+            </div>
+            <button onclick="calculateFootprint()">Calculate Footprint</button>
+          </div>
+        </div>
+
+          <!-- Right Side -->
+          <div class="right-block">
+              <h1>Right Side</h1>
+              <div class="inner-container">
+                  <div class="box">
+                      <p>Box 1: Right Side Content</p>
+                  </div>
+                  
+                  <div class="box">
+                      <p>Box 2: More Information</p>
+                  </div>
               </div>
           </div>
       </div>
-  </div>
+<!-- THIS SECTION IS ABOUT THE SPLIT SCREEN -->
+
+<!-- Bottom Block -->
+<section class="bottom-block">
+  <h1>Calculation Results</h1>
+  <div class="results">
+    <div class="result-card">
+        <div class="result-label">Transport</div>
+        <div class="result-value" id="transportResult">0 kg CO₂</div>
+    </div>
+    <div class="result-card">
+        <div class="result-label">Electricity</div>
+        <div class="result-value" id="electricityResult">0 kg CO₂</div>
+    </div>
+    <div class="result-card">
+        <div class="result-label">Food</div>
+        <div class="result-value" id="foodResult">0 kg CO₂</div>
+    </div>
+    <div class="result-card total">
+        <div class="result-label">Total</div>
+        <div class="result-value" id="totalResult">0 kg CO₂</div>
+    </div>
+</div>
+</section>
+<!-- BOTTOM BLOCK SECTION -->
+</div>
+
+<script>
+  // Emission factors
+  const EMISSION_FACTORS = {
+      car: 0.2,        // kg CO2/km
+      bus: 0.08,       // kg CO2/km
+      electricity: 0.5, // kg CO2/kWh
+      meatMeal: 3.0,   // kg CO2/meal
+      vegMeal: 0.5     // kg CO2/meal
+  };
+
+  function calculateFootprint() {
+      // Get input values
+      const carDistance = parseFloat(document.getElementById('carDistance').value) || 0;
+      const busDistance = parseFloat(document.getElementById('busDistance').value) || 0;
+      const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+      const meatMeals = parseFloat(document.getElementById('meatMeals').value) || 0;
+      const vegMeals = parseFloat(document.getElementById('vegMeals').value) || 0;
+
+      // Calculate emissions
+      const transport = (carDistance * EMISSION_FACTORS.car) + 
+                      (busDistance * EMISSION_FACTORS.bus);
+      const electricityEmissions = electricity * EMISSION_FACTORS.electricity;
+      const food = (meatMeals * EMISSION_FACTORS.meatMeal) + 
+                  (vegMeals * EMISSION_FACTORS.vegMeal);
+      const total = transport + electricityEmissions + food;
+
+      // Update results
+      document.getElementById('transportResult').textContent = `${transport.toFixed(2)} kg CO₂`;
+      document.getElementById('electricityResult').textContent = `${electricityEmissions.toFixed(2)} kg CO₂`;
+      document.getElementById('foodResult').textContent = `${food.toFixed(2)} kg CO₂`;
+      document.getElementById('totalResult').textContent = `${total.toFixed(2)} kg CO₂`;
+
+      // Show results
+      document.querySelector('.results').style.display = 'block';
+  }
+</script>
 </body>
 
 </html>
