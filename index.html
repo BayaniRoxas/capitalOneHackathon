@@ -28,7 +28,10 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             width: 100%;
-        }
+            display: grid;
+  grid-template-columns: 2fr 1fr; /* Adjust the ratio as needed */
+  gap: 20px;
+}
 
         h1 {
             text-align: center;
@@ -133,6 +136,33 @@
     color: #f5eeee;
 
 }
+.facts-section {
+  margin-top: 24px;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f7fafc;
+}
+
+.facts-section h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #2d3748;
+}
+
+.facts-section p {
+  font-size: 14px;
+  color: #718096;
+  margin-bottom: 4px;
+}
+
+.facts-section a {
+  color: #4299e1;
+  text-decoration: none;
+}
+
+.facts-section a:hover {
+  text-decoration: underline;
+}
         .results {
             display: none;
             margin-top: 24px;
@@ -182,7 +212,7 @@
 <body>
     <div class="container">
         <h1>Daily Carbon Footprint Calculator</h1>
-        
+        <div class="main-section">
         <div class="tabs">
             <button class="tab active" data-tab="transport">Transport</button>
             <button class="tab" data-tab="electricity">Electricity</button>
@@ -217,7 +247,12 @@
                 <input type="number" id="vegMeals" min="0" value="0">
             </div>
         </div>
-
+        </div>
+        <div class="facts-section">
+            <h2>Did you know?</h2>
+            <p id="fact-text"></p>
+            <a href="#" id="fact-link">Learn more</a>
+          </div>
         <button onclick="calculateFootprint()">Calculate Footprint</button>
         <button class="reset-button" onclick="resetForm()">Reset</button>
         <div class="results">
@@ -289,6 +324,7 @@
 
             // Update results
             document.getElementById('transportResult').textContent = `${transport.toFixed(2)} kg CO₂`;
+            
             // Update results (using totalElectricity)
   document.getElementById('electricityResult').textContent = `${totalElectricity.toFixed(2)} kg CO₂`;
             document.getElementById('foodResult').textContent = `${food.toFixed(2)} kg CO₂`;
@@ -296,9 +332,35 @@
 
             // Store current electricity usage for future calculations (optional)
   localStorage.setItem('electricityUsage', totalElectricity);
-            // Show results
+            
+  // Show results
             document.querySelector('.results').style.display = 'grid';
-        }
+            
+            // Update and show facts section after a delay
+  setTimeout(() => {
+    const selectedTab = document.querySelector('.tab.active').dataset.tab;
+
+    let factText, factLink;
+    switch (selectedTab) {
+      case 'transport':
+        factText = "Taking public transport instead of driving a car can significantly reduce your carbon footprint. Consider cycling, walking, or carpooling whenever possible.";
+        factLink = "https://www.epa.gov/transportation/taking-action-reduce-transportation-related-pollution";
+        break;
+      case 'electricity':
+        factText = "Switching to energy-efficient appliances and using renewable energy sources can help minimize your electricity footprint.";
+        factLink = "https://www.energystar.gov/";
+        break;
+      case 'food':
+        factText = "Reducing your meat consumption and opting for plant-based meals can significantly lower your food footprint.";
+        factLink = "https://www.cowspiracy.com/";
+        break;
+    }
+
+    document.getElementById('fact-text').textContent = factText;
+    document.getElementById('fact-link').href = factLink;
+    document.querySelector('.facts-section').style.display = 'block';
+  }, 500);
+}
         function resetForm() {
   // Reset input fields
   document.getElementById('carDistance').value = 0;
@@ -313,9 +375,8 @@
   document.getElementById('foodResult').textContent = '0 kg CO₂';
   document.getElementById('totalResult').textContent = '0 kg CO₂';
 
-  // Hide results and facts section
-  document.querySelector('.results').style.display = 'none';
-  document.querySelector('.facts-section').style.display = 'none';
+// Show results and facts section
+document.querySelector('.facts-section').style.display = 'block';
 }
     </script>
 </body>
