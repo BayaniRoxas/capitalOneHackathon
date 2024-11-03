@@ -1,0 +1,351 @@
+body {
+    margin: 0;
+    font-family: 'Prompt', sans-serif;
+    color: white;
+    background: #202731;
+    overflow-x: hidden;
+    font-family: 'Roboto mono', monospace;
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 400px;
+    padding: 100px 20vw;
+}
+
+.pink {
+    margin-top: px;
+    background: #ff0066;
+    overflow: hidden;
+    min-height: 300px; /* Adjusted to reduce height */
+}
+
+.dark {
+    background: #0f0f10;
+}
+
+.curve {
+    position: absolute;
+    height: 225px;
+    width: 100%;
+    bottom: 0;
+}
+
+.curve::before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    background-color: #202731;
+    transform: translate(85%, 60%);
+}
+
+.curve::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    background-color: #3c31dd;
+    transform: translate(-4%, 40%);
+    z-index: -1;
+}
+
+.bubble::after {
+    content: '';
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    position: absolute;
+    bottom: 0;
+    height: 85%;
+    width: 100%;
+    background-color: #0f0f10;
+    z-index: -1;
+}
+
+.waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.waves svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 149px;
+}
+
+.waves .shape-fill {
+    fill: #0f0f10;
+}
+
+.spacer {
+    aspect-ratio: 960/300;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #ff0066;
+}
+
+.layer1 {
+    background-image: url(./layer1.svg);
+}
+
+.layer2 {
+    background-image: url(./layer2.svg);
+}
+
+.flip {
+    transform: rotate(180deg);
+}
+
+.blob-motion {
+    position: absolute;
+    transform: translateY(-20%);
+    z-index: 0;
+}
+
+.blob-content {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 300px; /* Adjusted to reduce height */
+    padding: 100px;
+}
+
+.blob-content h1 {
+    font-size: 100px;
+    font-family: 'Roboto mono', monospace;
+    text-align: center;
+}
+
+#tagLine {
+    display: flex;
+    margin-top: 20px;
+    font-size: 12px;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.specialButton {
+    margin-top: 80px;
+    padding: 10px;
+}
+
+
+/* BLEH BLEH BLEH BLEH BLEH */
+
+/* Container for the two main blocks */
+.container {
+    display: flex;
+    min-height: 100vh; /* Full viewport height, grows as content is added */
+}
+
+/* Main block styling */
+.block {
+    flex: 1; /* Each block takes up 50% of the container width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    overflow-y: auto; /* Allows scrolling within each block if content overflows */
+}
+
+/* Left and right block background colors */
+.left-block {
+    background-color: #3498db;
+    border-right: 4px solid #ffffff; /* Adds a white border between the blocks */
+}
+
+.right-block {
+    background-color: #2ecc71;
+}
+
+/* Inner container for each block */
+.inner-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between boxes */
+    width: 80%; /* Width of inner container */
+}
+
+/* Styling for individual boxes */
+.box {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 12px;
+}
+
+.tab {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #4a5568;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.tab.active {
+    background-color: #e2e8f0;
+    color: #2d3748;
+    font-weight: 500;
+}
+
+.tab:hover {
+    background-color: #edf2f7;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+button {
+    width: 50%;
+    padding: 12px;
+    background-color: #48bb78;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #38a169;
+}
+.reset-button {
+background-color: #f0f0f0;
+border: 1px solid #ccc;
+border-radius: 6px;
+padding: 5px 12px;
+font-size: 12px;
+cursor: pointer;
+margin-right: 8px; /* Adjust margin as needed */
+width: 45%;
+height: 45px;
+min-height: 7px;
+}
+
+.reset-button {
+background-color: #ff0000; /* Turn red on hover */
+color: #f5eeee;
+
+}
+
+.facts-section {
+    margin-top: 24px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f7fafc;
+  }
+  
+  .facts-section h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #2d3748;
+  }
+  
+  .facts-section p {
+    font-size: 14px;
+    color: #718096;
+    margin-bottom: 4px;
+  }
+  
+  .facts-section a {
+    color: #4299e1;
+    text-decoration: none;
+  }
+  
+  .facts-section a:hover {
+    text-decoration: underline;
+  }
+
+  .results {
+    display: none;
+    margin-top: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.result-card {
+    background-color: #f7fafc;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-card.total {
+    background-color: #f0fff4;
+}
+
+.result-label {
+    font-size: 14px;
+    color: #718096;
+    margin-bottom: 4px;
+}
+
+.result-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+/* Sliding animation */
+
