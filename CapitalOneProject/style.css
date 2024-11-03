@@ -149,48 +149,89 @@ section {
 
 /* BLEH BLEH BLEH BLEH BLEH */
 
-/* Container for the two main blocks */
+/* General container styling */
 .container {
-    display: flex;
-    min-height: 100vh; /* Full viewport height, grows as content is added */
-}
-
-/* Main block styling */
-.block {
-    flex: 1; /* Each block takes up 50% of the container width */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    color: white;
-    overflow-y: auto; /* Allows scrolling within each block if content overflows */
+    text-align: center;
 }
 
-/* Left and right block background colors */
+/* Top, split, and bottom block styling */
+.top-block, .bottom-block {
+    width: 100%;
+    padding: 20px;
+    background-color: #ff0066;
+    color: white;
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    min-height: 300px;
+}
+
+.left-block, .right-block {
+    flex: 1;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .left-block {
     background-color: #3498db;
-    border-right: 4px solid #ffffff; /* Adds a white border between the blocks */
+    border-right: 4px solid white;
 }
 
 .right-block {
     background-color: #2ecc71;
 }
 
-/* Inner container for each block */
 .inner-container {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between boxes */
-    width: 80%; /* Width of inner container */
+    gap: 20px;
+    width: 80%;
 }
 
-/* Styling for individual boxes */
 .box {
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 8px;
-    text-align: center;
 }
+
+/* */
+
+.results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* Creates a 2-column grid */
+    gap: 20px;                        /* Adds space between the boxes */
+    max-width: 600px;                 /* Optional: Adjust max width */
+    margin: 0 auto;                   /* Centers the grid */
+    position: relative;               /* Establishes a new positioning context */
+    z-index: 10;                      /* Ensures the grid is on top */
+}
+
+.result-card {
+    padding: 20px;
+    border: 1px solid #ccc;           /* Adds a light border around each box */
+    border-radius: 8px;               /* Rounded corners */
+    text-align: center;
+    background-color: #f9f9f9;        /* Light background color */
+    color: black;                     /* Sets text color to black */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+    position: relative;               /* Ensures each card respects z-index */
+    z-index: 10;                      /* Ensures each card is on top */
+}
+
+.total {
+    font-weight: bold;
+    background-color: #e6f7ff;        /* Different color for Total box */
+    color: black;                     /* Sets text color to black */
+}
+
 
 /* Sliding animation */
 
